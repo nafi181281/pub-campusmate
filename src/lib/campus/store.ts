@@ -100,7 +100,7 @@ function initialState(): State {
   return {
     role: "student",
     studentId: "210101",
-    teacherId: "habib",
+    teacherId: "aps",
     registrations: {},
     petitions: [],
     availability: Object.fromEntries(TEACHERS.map((t) => [t.id, t.availability])),
@@ -196,7 +196,7 @@ export const useCampus = create<State & Actions>()(
       resetDemo: () => set({ ...initialState(), role: get().role, studentId: get().studentId, teacherId: get().teacherId }),
     }),
     {
-      name: "pub-campusmate-v1",
+      name: "pub-campusmate-v2",
       storage: createJSONStorage(() => localStorage),
       skipHydration: true,
     },
