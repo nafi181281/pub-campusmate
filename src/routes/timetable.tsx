@@ -13,9 +13,9 @@ export const Route = createFileRoute("/timetable")({
   head: () => ({
     meta: [
       { title: "Weekly Timetable — PUB CampusMate" },
-      { name: "description", content: "Sunday to Thursday class routine for CSE 2nd Year 1st Semester with rooms, labs, instructors and clash highlighting." },
+      { name: "description", content: "Saturday to Tuesday and Friday class routine for CSE 2nd Year 1st Semester with rooms, labs, instructors and clash highlighting." },
       { property: "og:title", content: "Weekly Timetable — PUB CampusMate" },
-      { property: "og:description", content: "Clash-free weekly routine, 09:00 AM to 04:30 PM, for PUB CSE." },
+      { property: "og:description", content: "Clash-free weekly routine, 09:30 AM to 03:45 PM, for PUB CSE." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -60,7 +60,7 @@ function TimetablePage() {
 
   return (
     <>
-      <PageHeader eyebrow={`${SEMESTER} · Published ${publishedAt ? fmtDate(publishedAt.slice(0, 10)) : ""}`} title="Weekly Timetable" titleBn="সাপ্তাহিক ক্লাস রুটিন" description="Sunday to Thursday, 09:00 AM – 04:30 PM. Theory in Rooms 301, 302 and 405; labs in Software Lab 1, Database Lab and Network & Hardware Lab." />
+      <PageHeader eyebrow={`${SEMESTER} · Published ${publishedAt ? fmtDate(publishedAt.slice(0, 10)) : ""}`} title="Weekly Timetable" titleBn="সাপ্তাহিক ক্লাস রুটিন" description="Saturday to Tuesday and Friday, 09:30 AM – 03:45 PM. Theory in NB-502, 503, 504, 702 and 703; labs in NB-281, 406, 606 and 608." />
       <div className="mx-auto max-w-7xl space-y-4 px-4 py-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
