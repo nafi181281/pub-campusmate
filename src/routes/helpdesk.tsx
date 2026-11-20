@@ -14,13 +14,13 @@ import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useCampus, type ChatMessage } from "@/lib/campus/store";
 import { GRADE_SCALE, gradeFor } from "@/lib/campus/grading";
-import { POLICIES } from "@/lib/campus/knowledge";
+import { POLICIES, offlineAnswer } from "@/lib/campus/knowledge";
 
 export const Route = createFileRoute("/helpdesk")({
   head: () => ({
     meta: [
       { title: "Jervis (বাংলা / English) — PUB CampusMate" },
-      { name: "description", content: "Bilingual AI helpdesk for PUB students: grading, credit limits, course drop, probation and tuition fee policy with official source citations." },
+      { name: "description", content: "Jervis, the bilingual AI assistant for PUB students: grading, credit limits, course drop, probation and tuition fee policy with official source citations." },
       { property: "og:title", content: "Jervis — PUB CampusMate" },
       { property: "og:description", content: "Ask in Bangla or English about PUB academic policies, with cited official sources." },
       { property: "og:type", content: "website" },
@@ -36,7 +36,8 @@ const SUGGESTIONS = [
   "How is tuition fee paid?",
   "কোর্স ড্রপ করার নিয়ম কী?",
   "Can I take CSE 2101 without CSE 1201?",
-  "What is the hostel fee?",
+  "Explain binary search in C",
+  "সৌরজগতে কয়টি গ্রহ আছে?",
 ];
 
 function HelpdeskPage() {
@@ -74,7 +75,7 @@ function HelpdeskPage() {
       });
       if (!res.ok || !res.body) {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
-        throw new Error(data.error ?? "The helpdesk could not answer right now.");
+        throw new Error(data.error ?? "Jervis could not answer right now.");
       }
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
@@ -92,8 +93,9 @@ function HelpdeskPage() {
         if (acc.trim()) setChat([...history, { id: crypto.randomUUID(), role: "assistant", text: acc + "\n\n_(stopped)_" }]);
         setStatus("ready");
       } else {
-        setError((e as Error).message);
-        setStatus("error");
+        // Network/server failure: answer from the offline knowledge base instead of an error.
+        setChat([...history, { id: crypto.randomUUID(), role: "assistant", text: acc.trim() ? acc : offlineAnswer(trimmed, lang) }]);
+        setStatus("ready");
       }
     } finally {
       setStreaming(null);
@@ -110,15 +112,15 @@ function HelpdeskPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Bilingual · বাংলা / English" title="Jervis" titleBn="এআই হেল্পডেস্ক" description="Answers come from PUB's official academic policies and cite their source. If something isn't in the official documents, the helpdesk will say so." />
+      <PageHeader eyebrow="Bilingual · বাংলা / English" title="Jervis" titleBn="জারভিস" description="Ask anything — study, coding, general knowledge or campus policy. Policy answers cite PUB's official documents." />
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 lg:grid-cols-[1fr_340px]">
         <section className="flex h-[72vh] min-h-[520px] flex-col rounded-lg border bg-card shadow-card">
           <div className="flex items-center justify-between gap-3 border-b px-4 py-3">
             <div className="flex items-center gap-3">
               <img src={logo.url} alt="" className="size-9 rounded-full border bg-card object-contain" />
               <div>
-                <p className="font-semibold leading-tight">CampusMate Helpdesk</p>
-                <p className="text-xs text-muted-foreground">PUB Academic Ordinance knowledge base</p>
+                <p className="font-semibold leading-tight">Jervis</p>
+                <p className="text-xs text-muted-foreground">Your all-round assistant · বাংলা / English</p>
               </div>
             </div>
             <Button
@@ -140,7 +142,7 @@ function HelpdeskPage() {
                 <ConversationEmptyState
                   icon={<img src={logo.url} alt="" className="size-16 rounded-full border bg-card object-contain" />}
                   title="আসসালামু আলাইকুম! How can I help?"
-                  description="Ask about grading, credit limits, course drop, probation or tuition fees — in বাংলা or English."
+                  description="Ask anything — coding, study, general knowledge or PUB policies — in বাংলা or English."
                 />
               ) : (
                 chat.map((m) => (
