@@ -76,7 +76,7 @@ function LostFoundPage() {
               <SelectContent><SelectItem value="Lost">I lost something</SelectItem><SelectItem value="Found">I found something</SelectItem></SelectContent>
             </Select>
             <Input placeholder="What is it?" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <Input placeholder="Where? (e.g. Room 301)" value={place} onChange={(e) => setPlace(e.target.value)} />
+            <Input placeholder="Where? (e.g. NB-503)" value={place} onChange={(e) => setPlace(e.target.value)} />
             <Input placeholder="How to reach you" value={contact} onChange={(e) => setContact(e.target.value)} />
             <Button
               className="w-full"
