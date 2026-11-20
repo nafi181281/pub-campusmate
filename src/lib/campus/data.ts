@@ -1,25 +1,24 @@
 // Demo data for PUB CampusMate — CSE 2nd Year 1st Semester (OBE curriculum).
 
-export type Day = "Sun" | "Mon" | "Tue" | "Wed" | "Thu";
-export const DAYS: Day[] = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+export type Day = "Sat" | "Sun" | "Mon" | "Tue" | "Fri";
+export const DAYS: Day[] = ["Sat", "Sun", "Mon", "Tue", "Fri"];
 export const DAY_LABEL: Record<Day, string> = {
+  Sat: "Saturday",
   Sun: "Sunday",
   Mon: "Monday",
   Tue: "Tuesday",
-  Wed: "Wednesday",
-  Thu: "Thursday",
+  Fri: "Friday",
 };
 
 export const SLOTS = [
-  { id: "S1", start: "09:00", end: "10:20" },
-  { id: "S2", start: "10:30", end: "11:50" },
-  { id: "S3", start: "12:00", end: "13:20" },
-  { id: "S4", start: "13:30", end: "14:50" },
-  { id: "S5", start: "15:00", end: "16:30" },
+  { id: "S1", start: "09:30", end: "10:45" },
+  { id: "S2", start: "10:45", end: "12:00" },
+  { id: "S3", start: "12:00", end: "13:15" },
+  { id: "S4", start: "14:30", end: "15:45" },
 ] as const;
 
-export const THEORY_ROOMS = ["Room 301", "Room 302", "Room 405"] as const;
-export const LAB_ROOMS = ["Software Lab 1", "Database Lab", "Network & Hardware Lab"] as const;
+export const THEORY_ROOMS = ["NB-502", "NB-503", "NB-504", "NB-702", "NB-703"] as const;
+export const LAB_ROOMS = ["NB-281", "NB-406", "NB-606", "NB-608"] as const;
 export const ROOMS = [...THEORY_ROOMS, ...LAB_ROOMS];
 
 export type Course = {
@@ -31,14 +30,16 @@ export type Course = {
 };
 
 export const COURSES: Course[] = [
-  { code: "CSE 2101", title: "Design and Analysis of Algorithms", credits: 3, kind: "theory", prereq: { code: "CSE 1201", title: "Data Structures" } },
-  { code: "CSE 2102", title: "Design and Analysis of Algorithms Sessional", credits: 1, kind: "lab" },
-  { code: "CSE 2103", title: "Database Management Systems", credits: 3, kind: "theory", prereq: { code: "CSE 1101", title: "Structured Programming" } },
-  { code: "CSE 2104", title: "Database Management Systems Sessional", credits: 1, kind: "lab" },
   { code: "CSE 2105", title: "Digital Electronics", credits: 3, kind: "theory" },
   { code: "CSE 2106", title: "Digital Electronics Sessional", credits: 1, kind: "lab" },
-  { code: "MTH 2101", title: "Linear Algebra, Vector Analysis & Co-ordinate Geometry", credits: 3, kind: "theory" },
+  { code: "CSE 1201", title: "Data Structure", credits: 3, kind: "theory" },
+  { code: "CSE 1202", title: "Data Structure Sessional", credits: 1, kind: "lab" },
+  { code: "MTH 2101", title: "Linear Algebra, Vector Analysis and Co-ordinate Geometry", credits: 3, kind: "theory" },
+  { code: "CHM 2101", title: "Chemistry", credits: 3, kind: "theory" },
+  { code: "CHM 2102", title: "Chemistry Sessional", credits: 1, kind: "lab" },
   { code: "SS 2101", title: "Engineering Economics", credits: 2, kind: "theory" },
+  { code: "BUS 2201", title: "Financial, Cost and Managerial Accounting", credits: 3, kind: "theory" },
+  { code: "CSE 2101", title: "Design and Analysis of Algorithm", credits: 3, kind: "theory", prereq: { code: "CSE 1201", title: "Data Structure" } },
 ];
 
 export const courseByCode = (code: string) => COURSES.find((c) => c.code === code);
@@ -53,13 +54,16 @@ export type Teacher = {
   availability: Availability;
 };
 
+const ALL_DAYS: Day[] = ["Sat", "Sun", "Mon", "Tue", "Fri"];
+
 export const TEACHERS: Teacher[] = [
-  { id: "habib", name: "Md. Habib Ehsanul Hoque", designation: "Assistant Professor & Head, Dept. of CSE", core: true, availability: { days: ["Sun", "Mon", "Tue", "Wed", "Thu"], start: "10:00", end: "16:00" } },
-  { id: "moslema", name: "Moslema Jahan", designation: "Assistant Professor, Dept. of CSE", core: true, availability: { days: ["Sun", "Tue", "Wed"], start: "11:00", end: "15:00" } },
-  { id: "indraneel", name: "Indraneel Misra", designation: "Assistant Professor, Dept. of CSE", core: true, availability: { days: ["Mon", "Wed", "Thu"], start: "09:00", end: "13:00" } },
-  { id: "cse-lab", name: "CSE Lab Instructor", designation: "Lab Instructor, Dept. of CSE", core: false, availability: { days: ["Sun", "Mon", "Tue", "Wed", "Thu"], start: "09:00", end: "16:30" } },
-  { id: "math", name: "Mathematics Faculty", designation: "Dept. of Mathematics", core: false, availability: { days: ["Sun", "Mon", "Tue", "Wed", "Thu"], start: "09:00", end: "16:30" } },
-  { id: "econ", name: "Economics Faculty", designation: "Dept. of Social Science", core: false, availability: { days: ["Sun", "Mon", "Tue", "Wed", "Thu"], start: "09:00", end: "16:30" } },
+  { id: "aps", name: "APS", designation: "Dept. of CSE", core: true, availability: { days: ALL_DAYS, start: "09:00", end: "16:00" } },
+  { id: "amar", name: "AMAR", designation: "Dept. of CSE", core: true, availability: { days: ALL_DAYS, start: "09:00", end: "16:00" } },
+  { id: "sr", name: "SR", designation: "Dept. of CSE", core: true, availability: { days: ALL_DAYS, start: "09:00", end: "16:00" } },
+  { id: "dsr", name: "DSR", designation: "Dept. of Chemistry", core: false, availability: { days: ALL_DAYS, start: "09:00", end: "16:00" } },
+  { id: "mj", name: "MJ", designation: "Dept. of Mathematics", core: false, availability: { days: ALL_DAYS, start: "09:00", end: "16:00" } },
+  { id: "as", name: "AS", designation: "Dept. of Social Science", core: false, availability: { days: ALL_DAYS, start: "09:00", end: "16:00" } },
+  { id: "bnr", name: "BNR", designation: "Dept. of Business Administration", core: false, availability: { days: ALL_DAYS, start: "09:00", end: "16:00" } },
 ];
 
 export const teacherById = (id: string) => TEACHERS.find((t) => t.id === id);
@@ -81,26 +85,31 @@ const m = (day: Day, from: number, to: number, room: string): Meeting => ({
   room,
 });
 
+// Matches the official PUB CSE Class Routine, Summer 2026 (27th batch, 2nd Year 1st Semester).
 export function makeSeedRoutine(): Offering[] {
   return [
     // Section A
-    { id: "CSE2101-A", courseCode: "CSE 2101", section: "A", teacherId: "habib", meetings: [m("Sun", 2, 2, "Room 301"), m("Tue", 2, 2, "Room 301")] },
-    { id: "CSE2102-A", courseCode: "CSE 2102", section: "A", teacherId: "habib", meetings: [m("Thu", 3, 4, "Software Lab 1")] },
-    { id: "CSE2103-A", courseCode: "CSE 2103", section: "A", teacherId: "moslema", meetings: [m("Sun", 3, 3, "Room 405"), m("Tue", 3, 3, "Room 405")] },
-    { id: "CSE2104-A", courseCode: "CSE 2104", section: "A", teacherId: "moslema", meetings: [m("Wed", 3, 4, "Database Lab")] },
-    { id: "CSE2105-A", courseCode: "CSE 2105", section: "A", teacherId: "indraneel", meetings: [m("Mon", 1, 1, "Room 301"), m("Thu", 1, 1, "Room 301")] },
-    { id: "CSE2106-A", courseCode: "CSE 2106", section: "A", teacherId: "indraneel", meetings: [m("Wed", 1, 2, "Network & Hardware Lab")] },
-    { id: "MTH2101-A", courseCode: "MTH 2101", section: "A", teacherId: "math", meetings: [m("Mon", 2, 2, "Room 405"), m("Tue", 4, 4, "Room 301")] },
-    { id: "SS2101-A", courseCode: "SS 2101", section: "A", teacherId: "econ", meetings: [m("Sun", 4, 4, "Room 301")] },
+    { id: "CSE2105-A", courseCode: "CSE 2105", section: "A", teacherId: "amar", meetings: [m("Sat", 1, 2, "NB-504")] },
+    { id: "BUS2201-A", courseCode: "BUS 2201", section: "A", teacherId: "bnr", meetings: [m("Sat", 3, 3, "NB-703"), m("Mon", 2, 2, "NB-702")] },
+    { id: "CSE2101-A", courseCode: "CSE 2101", section: "A", teacherId: "aps", meetings: [m("Sat", 4, 4, "NB-281")] },
+    { id: "CSE1201-A", courseCode: "CSE 1201", section: "A", teacherId: "aps", meetings: [m("Sun", 1, 1, "NB-504")] },
+    { id: "CHM2102-A", courseCode: "CHM 2102", section: "A", teacherId: "dsr", meetings: [m("Sun", 2, 2, "NB-606")] },
+    { id: "CHM2101-A", courseCode: "CHM 2101", section: "A", teacherId: "dsr", meetings: [m("Sun", 3, 3, "NB-606"), m("Mon", 4, 4, "NB-606")] },
+    { id: "CSE1202-A", courseCode: "CSE 1202", section: "A", teacherId: "aps", meetings: [m("Sun", 4, 4, "NB-406")] },
+    { id: "MTH2101-A", courseCode: "MTH 2101", section: "A", teacherId: "mj", meetings: [m("Mon", 1, 1, "NB-504"), m("Tue", 3, 3, "NB-504")] },
+    { id: "CSE2106-A", courseCode: "CSE 2106", section: "A", teacherId: "sr", meetings: [m("Tue", 1, 1, "NB-608")] },
+    { id: "SS2101-A", courseCode: "SS 2101", section: "A", teacherId: "as", meetings: [m("Tue", 2, 2, "NB-503")] },
     // Section B
-    { id: "CSE2101-B", courseCode: "CSE 2101", section: "B", teacherId: "habib", meetings: [m("Mon", 3, 3, "Room 302"), m("Wed", 2, 2, "Room 302")] },
-    { id: "CSE2102-B", courseCode: "CSE 2102", section: "B", teacherId: "habib", meetings: [m("Wed", 3, 4, "Software Lab 1")] },
-    { id: "CSE2103-B", courseCode: "CSE 2103", section: "B", teacherId: "moslema", meetings: [m("Sun", 4, 4, "Room 405"), m("Tue", 4, 4, "Room 405")] },
-    { id: "CSE2104-B", courseCode: "CSE 2104", section: "B", teacherId: "cse-lab", meetings: [m("Thu", 3, 4, "Database Lab")] },
-    { id: "CSE2105-B", courseCode: "CSE 2105", section: "B", teacherId: "indraneel", meetings: [m("Mon", 2, 2, "Room 302"), m("Thu", 2, 2, "Room 302")] },
-    { id: "CSE2106-B", courseCode: "CSE 2106", section: "B", teacherId: "cse-lab", meetings: [m("Sun", 1, 2, "Network & Hardware Lab")] },
-    { id: "MTH2101-B", courseCode: "MTH 2101", section: "B", teacherId: "math", meetings: [m("Tue", 2, 2, "Room 405"), m("Thu", 1, 1, "Room 302")] },
-    { id: "SS2101-B", courseCode: "SS 2101", section: "B", teacherId: "econ", meetings: [m("Mon", 4, 4, "Room 301")] },
+    { id: "CSE2105-B", courseCode: "CSE 2105", section: "B", teacherId: "amar", meetings: [m("Sun", 2, 3, "NB-503")] },
+    { id: "BUS2201-B", courseCode: "BUS 2201", section: "B", teacherId: "bnr", meetings: [m("Sun", 1, 1, "NB-702"), m("Fri", 1, 1, "NB-702")] },
+    { id: "CSE2101-B", courseCode: "CSE 2101", section: "B", teacherId: "aps", meetings: [m("Sat", 3, 3, "NB-503")] },
+    { id: "CSE1201-B", courseCode: "CSE 1201", section: "B", teacherId: "aps", meetings: [m("Mon", 1, 1, "NB-503")] },
+    { id: "CHM2102-B", courseCode: "CHM 2102", section: "B", teacherId: "dsr", meetings: [m("Mon", 2, 2, "NB-606")] },
+    { id: "CHM2101-B", courseCode: "CHM 2101", section: "B", teacherId: "dsr", meetings: [m("Mon", 3, 3, "NB-606"), m("Sat", 1, 1, "NB-606")] },
+    { id: "CSE1202-B", courseCode: "CSE 1202", section: "B", teacherId: "aps", meetings: [m("Mon", 4, 4, "NB-406")] },
+    { id: "MTH2101-B", courseCode: "MTH 2101", section: "B", teacherId: "mj", meetings: [m("Sat", 2, 2, "NB-502"), m("Tue", 4, 4, "NB-504")] },
+    { id: "CSE2106-B", courseCode: "CSE 2106", section: "B", teacherId: "sr", meetings: [m("Fri", 2, 2, "NB-608")] },
+    { id: "SS2101-B", courseCode: "SS 2101", section: "B", teacherId: "as", meetings: [m("Fri", 3, 3, "NB-503")] },
   ];
 }
 
@@ -197,19 +206,19 @@ export const NOTICES: Notice[] = [
 export type ExamEntry = { date: string; day: string; time: string; courseCode: string; room: string };
 
 export const EXAM_ROUTINE: ExamEntry[] = [
-  { date: "2027-01-10", day: "Sunday", time: "10:00 AM – 11:30 AM", courseCode: "CSE 2101", room: "Room 301, 302" },
-  { date: "2027-01-12", day: "Tuesday", time: "10:00 AM – 11:30 AM", courseCode: "CSE 2103", room: "Room 301, 302" },
-  { date: "2027-01-14", day: "Thursday", time: "10:00 AM – 11:30 AM", courseCode: "CSE 2105", room: "Room 405" },
-  { date: "2027-01-17", day: "Sunday", time: "10:00 AM – 11:30 AM", courseCode: "MTH 2101", room: "Room 301, 405" },
-  { date: "2027-01-19", day: "Tuesday", time: "10:00 AM – 11:00 AM", courseCode: "SS 2101", room: "Room 302" },
-  { date: "2027-01-21", day: "Thursday", time: "09:30 AM – 12:30 PM", courseCode: "CSE 2102 / 2104 / 2106", room: "Respective labs (lab quiz)" },
+  { date: "2027-01-10", day: "Sunday", time: "10:00 AM – 11:30 AM", courseCode: "CSE 2101", room: "NB-503, 504" },
+  { date: "2027-01-12", day: "Tuesday", time: "10:00 AM – 11:30 AM", courseCode: "CSE 1201", room: "NB-503, 504" },
+  { date: "2027-01-14", day: "Thursday", time: "10:00 AM – 11:30 AM", courseCode: "CSE 2105", room: "NB-504" },
+  { date: "2027-01-17", day: "Sunday", time: "10:00 AM – 11:30 AM", courseCode: "MTH 2101", room: "NB-502, 504" },
+  { date: "2027-01-19", day: "Tuesday", time: "10:00 AM – 11:00 AM", courseCode: "SS 2101", room: "NB-503" },
+  { date: "2027-01-21", day: "Thursday", time: "09:30 AM – 12:30 PM", courseCode: "CSE 1202 / 2106 / CHM 2102", room: "Respective labs (lab quiz)" },
 ];
 
 export type Assignment = { id: string; courseCode: string; title: string; due: string; marks: number; brief: string };
 
 export const ASSIGNMENTS: Assignment[] = [
   { id: "a1", courseCode: "CSE 2101", title: "Asymptotic analysis problem set", due: "2026-11-28", marks: 10, brief: "Solve 8 recurrence problems using the Master theorem and recursion tree method." },
-  { id: "a2", courseCode: "CSE 2103", title: "ER diagram for a university library", due: "2026-12-02", marks: 10, brief: "Design an ER diagram and convert it to a relational schema in 3NF." },
+  { id: "a2", courseCode: "CSE 1201", title: "Linked list and stack implementation", due: "2026-12-02", marks: 10, brief: "Implement a doubly linked list in C and use it to build a stack and a queue." },
   { id: "a3", courseCode: "CSE 2105", title: "Karnaugh map simplification", due: "2026-12-05", marks: 5, brief: "Simplify four Boolean functions and implement them with NAND gates only." },
   { id: "a4", courseCode: "SS 2101", title: "Break-even analysis case study", due: "2026-12-09", marks: 10, brief: "Analyse the break-even point of a small Bogura-based manufacturing firm." },
 ];
@@ -227,8 +236,8 @@ export const JOBS: Job[] = [
 export type LostItem = { id: string; kind: "Lost" | "Found"; title: string; place: string; date: string; contact: string; resolved: boolean };
 
 export const SEED_LOST_FOUND: LostItem[] = [
-  { id: "l1", kind: "Found", title: "Black Casio scientific calculator", place: "Room 302", date: "2026-11-16", contact: "CSE office, Academic Building", resolved: false },
+  { id: "l1", kind: "Found", title: "Black Casio scientific calculator", place: "NB-503", date: "2026-11-16", contact: "CSE office, Academic Building", resolved: false },
   { id: "l2", kind: "Lost", title: "Blue water bottle with PUB sticker", place: "Central library", date: "2026-11-15", contact: "Tanvir · 210101", resolved: false },
   { id: "l3", kind: "Found", title: "Student ID card (ID ending 0219)", place: "Canteen", date: "2026-11-14", contact: "Proctor office", resolved: false },
-  { id: "l4", kind: "Lost", title: "Pen drive (32 GB, silver)", place: "Software Lab 1", date: "2026-11-12", contact: "Nusrat · 210102", resolved: true },
+  { id: "l4", kind: "Lost", title: "Pen drive (32 GB, silver)", place: "NB-406", date: "2026-11-12", contact: "Nusrat · 210102", resolved: true },
 ];
