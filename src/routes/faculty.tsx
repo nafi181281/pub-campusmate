@@ -182,7 +182,7 @@ function AvailabilityEditor() {
   );
 }
 
-const WEEKDAY: (Day | null)[] = ["Sun", "Mon", "Tue", "Wed", "Thu", null, null];
+const WEEKDAY: (Day | null)[] = ["Sun", "Mon", "Tue", null, null, "Fri", "Sat"];
 
 function MakeupSection({ mine }: { mine: Offering[] }) {
   const t = useCurrentTeacher();
@@ -195,7 +195,7 @@ function MakeupSection({ mine }: { mine: Offering[] }) {
   const [date, setDate] = useState("");
   const [start, setStart] = useState("15:00");
   const [end, setEnd] = useState("16:30");
-  const [room, setRoom] = useState("Room 405");
+  const [room, setRoom] = useState("NB-504");
   const [reason, setReason] = useState("");
 
   const target = published.find((o) => o.id === offeringId);
