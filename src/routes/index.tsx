@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpenCheck, CalendarDays, ClipboardCheck, IdCard, Megaphone, MessageCircleQuestion, QrCode, Search, Briefcase, Users, LayoutGrid } from "lucide-react";
+import { ArrowRight, BookOpenCheck, CalendarDays, ClipboardCheck, IdCard, Megaphone, QrCode, Search, Briefcase, Users, LayoutGrid } from "lucide-react";
 import campusAsset from "@/assets/pub-campus-aerial.jpg.asset.json";
 import { NOTICES, SEMESTER, STUDENTS, ADVISOR, COURSES } from "@/lib/campus/data";
 import { useCampus } from "@/lib/campus/store";
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "PUB CampusMate — Smart Campus Companion | Pundra University" },
-      { name: "description", content: "Academic planning, course registration with prerequisite and clash checks, timetables and a bilingual AI helpdesk for Pundra University of Science & Technology." },
+      { name: "description", content: "Academic planning, course registration with prerequisite and clash checks, timetables and a bilingual AI assistant, Jervis, for Pundra University of Science & Technology." },
       { property: "og:title", content: "PUB CampusMate — Smart Campus Companion" },
       { property: "og:description", content: "একাডেমিক প্ল্যানিং, কোর্স রেজিস্ট্রেশন এবং AI হেল্পডেস্ক — Pundra University of Science & Technology, Bogura." },
       { property: "og:type", content: "website" },
@@ -26,8 +26,8 @@ export const Route = createFileRoute("/")({
 
 const MODULES = [
   { to: "/registration", icon: BookOpenCheck, title: "Course Registration", bn: "কোর্স রেজিস্ট্রেশন", text: "Prerequisite, credit-limit and clash checks in real time." },
-  { to: "/timetable", icon: CalendarDays, title: "Weekly Timetable", bn: "সাপ্তাহিক রুটিন", text: "Sunday–Thursday grid with rooms, labs and instructors." },
-  { to: "/helpdesk", icon: MessageCircleQuestion, title: "AI Helpdesk", bn: "এআই হেল্পডেস্ক", text: "Ask about grading, probation, fees — বাংলা or English." },
+  { to: "/timetable", icon: CalendarDays, title: "Weekly Timetable", bn: "সাপ্তাহিক রুটিন", text: "Saturday–Tuesday & Friday grid with rooms, labs and instructors." },
+  { to: "/helpdesk", icon: null, title: "Jervis", bn: "জারভিস", text: "Ask about grading, probation, fees — বাংলা or English." },
   { to: "/id-card", icon: IdCard, title: "Digital ID Card", bn: "ডিজিটাল আইডি কার্ড", text: "Flip card with QR code, barcode and blood group." },
   { to: "/attendance", icon: QrCode, title: "QR Attendance", bn: "কিউআর হাজিরা", text: "Time-expiring session codes for quick check-in." },
   { to: "/notices", icon: Megaphone, title: "Notices & Exams", bn: "নোটিশ ও পরীক্ষা", text: "Official announcements and midterm schedule download." },
@@ -50,9 +50,13 @@ function Index() {
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {MODULES.map((m) => (
             <Link key={m.to} to={m.to} className="group rounded-lg border bg-card p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-royal hover:shadow-lift">
-              <span className="inline-flex size-10 items-center justify-center rounded-md bg-accent text-royal group-hover:bg-royal group-hover:text-royal-foreground">
-                <m.icon className="size-5" />
-              </span>
+              {m.icon ? (
+                <span className="inline-flex size-10 items-center justify-center rounded-md bg-accent text-royal group-hover:bg-royal group-hover:text-royal-foreground">
+                  <m.icon className="size-5" />
+                </span>
+              ) : (
+                <span className="inline-flex size-10" aria-hidden />
+              )}
               <h3 className="mt-4 font-sans text-base font-semibold text-foreground">{m.title}</h3>
               <p className="text-sm text-royal">{m.bn}</p>
               <p className="mt-2 text-sm text-muted-foreground">{m.text}</p>
@@ -69,7 +73,7 @@ function Hero() {
   const role = useCampus((s) => s.role);
   return (
     <section className="relative isolate overflow-hidden">
-      <img src="/versity.png" alt="Aerial view of the Pundra University of Science & Technology campus in Bogura" className="absolute inset-0 -z-20 size-full object-cover" />
+      <img src={campusAsset.url} alt="Aerial view of the Pundra University of Science & Technology campus in Bogura" className="absolute inset-0 -z-20 size-full object-cover" />
       <div className="absolute inset-0 -z-10 bg-hero-overlay" />
       <div className="mx-auto max-w-7xl px-4 py-20 md:py-28">
         <p className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-amber">
