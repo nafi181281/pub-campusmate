@@ -58,8 +58,8 @@ function CoordinatorBody() {
   const update = (id: string, fn: (o: Offering) => Offering) => updateDraft(routineDraft.map((o) => (o.id === id ? fn(o) : o)));
 
   const injectClash = () => {
-    update("MTH2101-A", (o) => ({ ...o, meetings: [{ day: "Sun", start: "10:30", end: "11:50", room: "Room 301" }, ...o.meetings.slice(1)] }));
-    toast("Moved MTH 2101-A to Sunday 10:30 AM in Room 301 — see the clash report");
+    update("MTH2101-A", (o) => ({ ...o, meetings: [{ day: "Sat", start: "09:30", end: "10:45", room: "NB-504" }, ...o.meetings.slice(1)] }));
+    toast("Moved MTH 2101-A to Saturday 09:30 AM in NB-504 — see the clash report");
   };
 
   return (
