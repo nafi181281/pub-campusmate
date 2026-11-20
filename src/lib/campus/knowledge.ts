@@ -6,7 +6,7 @@ export const POLICIES = [
   { id: "drop", source: "PUB Academic Ordinance Sec 4.5", title: "Course drop policy", titleBn: "কোর্স ড্রপ নীতি", text: "A course may be dropped within the first 2 weeks of the semester without any penalty fee." },
   { id: "probation", source: "PUB Academic Ordinance Sec 6.1", title: "Academic probation", titleBn: "একাডেমিক প্রবেশন", text: "A CGPA below 2.00 places the student on academic probation, and the maximum load becomes 15 credits." },
   { id: "fees", source: "PUB Financial Regulations Sec 3.1", title: "Tuition fee payment", titleBn: "টিউশন ফি পরিশোধ", text: "30% of tuition is paid at semester start; the remaining 70% is paid in two installments, before the Midterm and before the Final examination." },
-  { id: "prereq", source: "PUB CSE OBE Curriculum, 2nd Year 1st Semester", title: "Prerequisites", titleBn: "পূর্বশর্ত কোর্স", text: "CSE 2101 Design and Analysis of Algorithms requires CSE 1201 Data Structures. CSE 2103 Database Management Systems requires CSE 1101 Structured Programming." },
+  { id: "prereq", source: "PUB CSE OBE Curriculum, 2nd Year 1st Semester", title: "Prerequisites", titleBn: "পূর্বশর্ত কোর্স", text: "CSE 2101 Design and Analysis of Algorithm requires CSE 1201 Data Structure." },
 ] as const;
 
 export function buildHelpdeskInstructions(lang: "auto" | "bn" | "en") {
@@ -34,7 +34,7 @@ const KEYWORDS: Record<string, string[]> = {
   drop: ["drop", "ড্রপ"],
   probation: ["probation", "প্রবেশন", "cgpa"],
   fees: ["fee", "tuition", "installment", "ফি", "টিউশন", "কিস্তি"],
-  prereq: ["prereq", "prerequisite", "cse 2101", "cse 2103", "পূর্বশর্ত"],
+  prereq: ["prereq", "prerequisite", "cse 2101", "পূর্বশর্ত"],
 };
 
 /** Offline answer used when the AI service is unavailable. */
