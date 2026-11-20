@@ -15,14 +15,15 @@ describe("registration rules", () => {
     expect(res.ok).toBe(false);
   });
 
-  it("lets Tanvir register the full Section A load (17 credits)", () => {
-    const res = checkSelection(studentById("210101")!, sectionA);
-    expect(res.totalCredits).toBe(17);
+  it("lets Tanvir register the regular Section A load (20 credits, without the CSE 2101 backlog)", () => {
+    const regular = sectionA.filter((o) => o.courseCode !== "CSE 2101");
+    const res = checkSelection(studentById("210101")!, regular);
+    expect(res.totalCredits).toBe(20);
     expect(res.ok).toBe(true);
   });
 
   it("requires at least 12 credits", () => {
-    const res = checkSelection(studentById("210101")!, pick("CSE2101-A", "CSE2103-A", "CSE2105-A", "CSE2102-A"));
+    const res = checkSelection(studentById("210101")!, pick("CSE2101-A", "CSE2105-A", "CSE1201-A", "CSE2106-A"));
     expect(res.totalCredits).toBe(10);
     expect(res.errors.some((e) => e.includes("Minimum 12"))).toBe(true);
   });
@@ -37,8 +38,8 @@ describe("registration rules", () => {
   });
 
   it("detects a time clash between overlapping sections", () => {
-    // CSE 2101-A meets Sun 10:30; CSE 2106-B lab is Sun 09:00–11:50
-    const res = checkSelection(studentById("210101")!, pick("CSE2101-A", "CSE2106-B"));
+    // CSE 2105-A meets Sat 09:30–12:00; CHM 2101-B lab is Sat 09:30–10:45
+    const res = checkSelection(studentById("210101")!, pick("CSE2105-A", "CHM2101-B"));
     expect(res.clashes).toHaveLength(1);
   });
 });
@@ -49,7 +50,7 @@ describe("routine clash engine", () => {
   });
 
   it("flags a double-booked room", () => {
-    const bad = routine.map((o) => (o.id === "MTH2101-A" ? { ...o, meetings: [{ ...o.meetings[0], day: "Sun" as const, start: "10:30", end: "11:50", room: "Room 301" }] } : o));
+    const bad = routine.map((o) => (o.id === "MTH2101-A" ? { ...o, meetings: [{ ...o.meetings[0], day: "Sat" as const, start: "09:30", end: "10:45", room: "NB-504" }] } : o));
     const kinds = detectRoutineIssues(bad).map((i) => i.kind);
     expect(kinds).toContain("room");
     expect(kinds).toContain("section");
