@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/pub-crest.jpg.asset.json";
 import { BrandStrip } from "./SiteHeader";
 
 export function SiteFooter() {
@@ -8,9 +7,15 @@ export function SiteFooter() {
       <BrandStrip />
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="flex gap-4">
-          <img src={logo.url} alt="PUB logo" className="size-16 shrink-0 rounded-full bg-card object-contain p-0.5" />
+          <img
+            src="/logo.png"
+            alt="PUB logo"
+            className="size-16 shrink-0 rounded-full bg-card object-contain p-0.5"
+          />
           <div>
-            <p className="font-display text-lg font-semibold text-primary-foreground">Pundra University of Science & Technology</p>
+            <p className="font-display text-lg font-semibold text-primary-foreground">
+              Pundra University of Science & Technology
+            </p>
             <p className="text-sm">পুণ্ড্র ইউনিভার্সিটি অব সায়েন্স অ্যান্ড টেকনোলজি</p>
             <p className="mt-2 text-sm opacity-80">Bogura, Bangladesh · Established 2001</p>
             <p className="mt-1 text-sm italic text-amber">Learn for Life</p>
