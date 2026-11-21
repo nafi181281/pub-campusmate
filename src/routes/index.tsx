@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpenCheck, CalendarDays, ClipboardCheck, IdCard, Megaphone, QrCode, Search, Briefcase, Users, LayoutGrid } from "lucide-react";
-import campusAsset from "@/assets/pub-campus-aerial.jpg.asset.json";
 import { NOTICES, SEMESTER, STUDENTS, ADVISOR, COURSES } from "@/lib/campus/data";
 import { useCampus } from "@/lib/campus/store";
 import { useCurrentStudent, useCurrentTeacher } from "@/lib/campus/hooks";
@@ -73,7 +72,11 @@ function Hero() {
   const role = useCampus((s) => s.role);
   return (
     <section className="relative isolate overflow-hidden">
-      <img src={campusAsset.url} alt="Aerial view of the Pundra University of Science & Technology campus in Bogura" className="absolute inset-0 -z-20 size-full object-cover" />
+      <img
+        src="/versity.png"
+        alt="Aerial view of the Pundra University of Science & Technology campus in Bogura"
+        className="absolute inset-0 -z-20 size-full object-cover"
+      />
       <div className="absolute inset-0 -z-10 bg-hero-overlay" />
       <div className="mx-auto max-w-7xl px-4 py-20 md:py-28">
         <p className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-amber">
