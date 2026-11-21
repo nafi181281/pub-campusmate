@@ -71,14 +71,14 @@ function Index() {
 function Hero() {
   const role = useCampus((s) => s.role);
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden bg-slate-900">
       <img
         src="/versity.png"
-        alt="Aerial view of the Pundra University of Science & Technology campus in Bogura"
-        className="absolute inset-0 -z-20 size-full object-cover"
+        alt="Aerial view of the Pundra University of Science & Technology campus in Bogura"[cite: 1]
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-45"
       />
-      <div className="absolute inset-0 -z-10 bg-hero-overlay" />
-      <div className="mx-auto max-w-7xl px-4 py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0 z-10 bg-slate-950/60" />
+      <div className="relative z-20 mx-auto max-w-7xl px-4 py-20 md:py-28">
         <p className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-amber">
           {SEMESTER} · Department of CSE
         </p>
