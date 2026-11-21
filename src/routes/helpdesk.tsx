@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import type { ChatStatus } from "ai";
 import { BookMarked, Languages, RotateCcw } from "lucide-react";
-import logo from "@/assets/pub-crest.jpg.asset.json";
 import { Conversation, ConversationContent, ConversationEmptyState, ConversationScrollButton } from "@/components/ai-elements/conversation";
 import { Message, MessageContent, MessageResponse } from "@/components/ai-elements/message";
 import { PromptInput, PromptInputFooter, PromptInputSubmit, PromptInputTextarea, PromptInputTools, type PromptInputMessage } from "@/components/ai-elements/prompt-input";
@@ -117,7 +116,7 @@ function HelpdeskPage() {
         <section className="flex h-[72vh] min-h-[520px] flex-col rounded-lg border bg-card shadow-card">
           <div className="flex items-center justify-between gap-3 border-b px-4 py-3">
             <div className="flex items-center gap-3">
-              <img src={logo.url} alt="" className="size-9 rounded-full border bg-card object-contain" />
+              <img src="/logo.png" alt="" className="size-9 rounded-full border bg-card object-contain" />
               <div>
                 <p className="font-semibold leading-tight">Jervis</p>
                 <p className="text-xs text-muted-foreground">Your all-round assistant · বাংলা / English</p>
@@ -140,7 +139,7 @@ function HelpdeskPage() {
             <ConversationContent>
               {chat.length === 0 && !streaming ? (
                 <ConversationEmptyState
-                  icon={<img src={logo.url} alt="" className="size-16 rounded-full border bg-card object-contain" />}
+                  icon={<img src="/logo.png" alt="" className="size-16 rounded-full border bg-card object-contain" />}
                   title="আসসালামু আলাইকুম! How can I help?"
                   description="Ask anything — coding, study, general knowledge or PUB policies — in বাংলা or English."
                 />
