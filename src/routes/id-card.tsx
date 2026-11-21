@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Droplet, RefreshCw } from "lucide-react";
-import logo from "@/assets/pub-crest.jpg.asset.json";
 import { useCurrentStudent } from "@/lib/campus/hooks";
 import { PageHeader } from "@/components/campus/PageHeader";
 import { RoleGate } from "@/components/campus/RoleGate";
@@ -67,7 +66,7 @@ function IdCard() {
           <div className="flip-face absolute inset-0 flex flex-col overflow-hidden rounded-2xl border bg-card shadow-lift">
             <div className="bg-gradient-navy px-5 pb-12 pt-5 text-primary-foreground">
               <div className="flex items-center gap-3">
-                <img src={logo.url} alt="" className="size-12 rounded-full bg-card object-contain p-0.5" />
+                <img src="/logo.png" alt="PUB logo" className="size-12 rounded-full bg-card object-contain p-0.5" />
                 <div className="leading-tight">
                   <p className="text-sm font-semibold">Pundra University of</p>
                   <p className="text-sm font-semibold">Science & Technology</p>
