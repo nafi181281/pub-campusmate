@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpenCheck, CalendarDays, ClipboardCheck, IdCard, Megaphone, QrCode, Search, Briefcase, Users, LayoutGrid } from "lucide-react";
 import { NOTICES, SEMESTER, STUDENTS, ADVISOR, COURSES } from "@/lib/campus/data";
 import { useCampus } from "@/lib/campus/store";
 import { useCurrentStudent, useCurrentTeacher } from "@/lib/campus/hooks";
@@ -24,14 +23,14 @@ export const Route = createFileRoute("/")({
 });
 
 const MODULES = [
-  { to: "/registration", icon: BookOpenCheck, title: "Course Registration", bn: "কোর্স রেজিস্ট্রেশন", text: "Prerequisite, credit-limit and clash checks in real time." },
-  { to: "/timetable", icon: CalendarDays, title: "Weekly Timetable", bn: "সাপ্তাহিক রুটিন", text: "Saturday–Tuesday & Friday grid with rooms, labs and instructors." },
-  { to: "/helpdesk", icon: null, title: "Jervis", bn: "জারভিস", text: "Ask about grading, probation, fees — বাংলা or English." },
-  { to: "/id-card", icon: IdCard, title: "Digital ID Card", bn: "ডিজিটাল আইডি কার্ড", text: "Flip card with QR code, barcode and blood group." },
-  { to: "/attendance", icon: QrCode, title: "QR Attendance", bn: "কিউআর হাজিরা", text: "Time-expiring session codes for quick check-in." },
-  { to: "/notices", icon: Megaphone, title: "Notices & Exams", bn: "নোটিশ ও পরীক্ষা", text: "Official announcements and midterm schedule download." },
-  { to: "/assignments", icon: Briefcase, title: "Assignments & Careers", bn: "অ্যাসাইনমেন্ট ও ক্যারিয়ার", text: "Submit coursework, browse internships and jobs." },
-  { to: "/lost-found", icon: Search, title: "Lost & Found", bn: "হারানো ও প্রাপ্তি", text: "Quick campus board for misplaced items." },
+  { to: "/registration", title: "Course Registration", bn: "কোর্স রেজিস্ট্রেশন", text: "Prerequisite, credit-limit and clash checks in real time." },
+  { to: "/timetable", title: "Weekly Timetable", bn: "সাপ্তাহিক রুটিন", text: "Saturday–Tuesday & Friday grid with rooms, labs and instructors." },
+  { to: "/helpdesk", title: "Jervis", bn: "জারভিস", text: "Ask about grading, probation, fees — বাংলা or English." },
+  { to: "/id-card", title: "Digital ID Card", bn: "ডিজিটাল আইডি কার্ড", text: "Flip card with QR code, barcode and blood group." },
+  { to: "/attendance", title: "QR Attendance", bn: "কিউআর হাজিরা", text: "Time-expiring session codes for quick check-in." },
+  { to: "/notices", title: "Notices & Exams", bn: "নোটিশ ও পরীক্ষা", text: "Official announcements and midterm schedule download." },
+  { to: "/assignments", title: "Assignments & Careers", bn: "অ্যাসাইনমেন্ট ও ক্যারিয়ার", text: "Submit coursework, browse internships and jobs." },
+  { to: "/lost-found", title: "Lost & Found", bn: "হারানো ও প্রাপ্তি", text: "Quick campus board for misplaced items." },
 ] as const;
 
 function Index() {
@@ -48,17 +47,23 @@ function Index() {
         </div>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {MODULES.map((m) => (
-            <Link key={m.to} to={m.to} className="group rounded-lg border bg-card p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-royal hover:shadow-lift">
-              {m.icon ? (
-                <span className="inline-flex size-10 items-center justify-center rounded-md bg-accent text-royal group-hover:bg-royal group-hover:text-royal-foreground">
-                  <m.icon className="size-5" />
-                </span>
-              ) : (
-                <span className="inline-flex size-10" aria-hidden />
-              )}
-              <h3 className="mt-4 font-sans text-base font-semibold text-foreground">{m.title}</h3>
-              <p className="text-sm text-royal">{m.bn}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{m.text}</p>
+            <Link
+              key={m.to}
+              to={m.to}
+              className="group relative overflow-hidden rounded-lg border bg-card p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-royal hover:shadow-lift"
+            >
+              <img
+                src="/versity.png"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-15 transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="pointer-events-none absolute inset-0 z-10 bg-card/75" />
+              <div className="relative z-20">
+                <h3 className="font-sans text-base font-semibold text-foreground">{m.title}</h3>
+                <p className="text-sm text-royal">{m.bn}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{m.text}</p>
+              </div>
             </Link>
           ))}
         </div>
@@ -92,22 +97,22 @@ function Hero() {
         <div className="mt-8 flex flex-wrap gap-3">
           {role === "student" && (
             <Button asChild size="lg" className="bg-amber text-amber-foreground hover:bg-amber/90">
-              <Link to="/registration">Register courses <ArrowRight /></Link>
+              <Link to="/registration">Register courses →</Link>
             </Button>
           )}
           {role === "faculty" && (
             <Button asChild size="lg" className="bg-amber text-amber-foreground hover:bg-amber/90">
-              <Link to="/faculty">Open faculty desk <ArrowRight /></Link>
+              <Link to="/faculty">Open faculty desk →</Link>
             </Button>
           )}
           {role === "advisor" && (
             <Button asChild size="lg" className="bg-amber text-amber-foreground hover:bg-amber/90">
-              <Link to="/advisor">Review registrations <ArrowRight /></Link>
+              <Link to="/advisor">Review registrations →</Link>
             </Button>
           )}
           {role === "coordinator" && (
             <Button asChild size="lg" className="bg-amber text-amber-foreground hover:bg-amber/90">
-              <Link to="/coordinator">Build the routine <ArrowRight /></Link>
+              <Link to="/coordinator">Build the routine →</Link>
             </Button>
           )}
           <Button asChild size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
@@ -198,7 +203,7 @@ function CoordinatorToday() {
   const issues = detectRoutineIssues(draft, availability);
   return (
     <div className="grid gap-4 md:grid-cols-3">
-      <Tile label="Coordinator desk" value={<span className="flex items-center gap-2 text-xl"><LayoutGrid className="size-5 text-royal" /> CSE 2-1</span>} hint={`${draft.length} section offerings in draft`} />
+      <Tile label="Coordinator desk" value={<span className="text-xl">CSE 2-1</span>} hint={`${draft.length} section offerings in draft`} />
       <Tile label="Draft clashes" value={<span className={issues.length ? "text-destructive" : "text-success"}>{issues.length}</span>} hint={issues.length ? "Resolve before publishing" : "Clash-free — ready to publish"} />
       <Tile label="Last published" value={<span className="text-base">{publishedAt ? fmtDate(publishedAt.slice(0, 10)) : "—"}</span>} hint="Timetable visible to students" />
     </div>
@@ -233,15 +238,14 @@ function NoticesPreview() {
         </div>
         <div className="flex flex-col justify-between rounded-lg bg-gradient-navy p-6 text-primary-foreground shadow-lift">
           <div>
-            <Users className="size-8 text-amber" />
-            <h2 className="mt-3 text-xl font-bold">Try every portal</h2>
+            <h2 className="text-xl font-bold">Try every portal</h2>
             <p className="mt-2 text-sm text-primary-foreground/80">
               Use the demo bar at the top to switch between students, faculty, the academic advisor and the department coordinator.
               Submit a registration as Nusrat to see the prerequisite block, then approve it as the advisor.
             </p>
           </div>
           <Button asChild className="mt-6 w-fit bg-amber text-amber-foreground hover:bg-amber/90">
-            <Link to="/registration"><ClipboardCheck /> Start with registration</Link>
+            <Link to="/registration">Start with registration →</Link>
           </Button>
         </div>
       </div>
