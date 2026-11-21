@@ -79,7 +79,7 @@ function Hero() {
     <section className="relative isolate overflow-hidden bg-slate-900">
       <img
         src="/versity.png"
-        alt="Aerial view of the Pundra University of Science & Technology campus in Bogura"[cite: 1]
+        alt="Aerial view of the Pundra University of Science & Technology campus in Bogura"
         className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-45"
       />
       <div className="pointer-events-none absolute inset-0 z-10 bg-slate-950/60" />
